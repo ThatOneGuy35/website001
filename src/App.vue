@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<v-app class="grey">
+    <v-main class="grey lighten-4">
+      <Navbar />
+      <router-view/>
+    </v-main>
+</v-app>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from '@/components/Navbar'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    Navbar,
+  },
+  data: () => ({
+    //
+  }),
+  created() {
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  },
+  methods: {
+    checkRoute() {
+      if (this.$route.name === "Vehicles" || this.$route.name === "Admin")
+        console.log('The check for the route has been successfully completed')
+    },
+  },
+};
+</script>
