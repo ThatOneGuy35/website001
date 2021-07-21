@@ -11,11 +11,12 @@ Vue.use(Vuex)
 //Create store
 export default new Vuex.Store({
   state: {
+    isLogged: false
   },
   mutations: {
-
   },
-  actions: {},
+  actions: {
+  },
 
   modules: {
     access,

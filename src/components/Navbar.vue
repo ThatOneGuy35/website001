@@ -24,12 +24,12 @@
            <v-list-item-title>Home</v-list-item-title>
          </v-list-item-content>
        </v-list-item>
-       <v-list-item link v-show="!isLogged">
+       <v-list-item link v-show="!isLogged" to='/about'>
          <v-list-item-content>
            <v-list-item-title>About</v-list-item-title>
          </v-list-item-content>
        </v-list-item>
-       <v-list-item link v-show="!isLogged">
+       <v-list-item link v-show="!isLogged" to='/contact'>
          <v-list-item-content>
            <v-list-item-title>Contact Us</v-list-item-title>
          </v-list-item-content>
@@ -55,34 +55,26 @@
 </template>
 
 <script>
-import { auth } from '@/firebase'
+import { mapState } from 'vuex'
   export default {
     name: 'Navbar',
     data() {
       return {
         toggleNavbar: false,
-        isLogged: false,
-        isAdmin: false,
+
         search: '',
         searchOn: false,
       }
     },
-    mounted() {
-      if(auth.currentUser){
-        this.isLogged = true
-        console.log('Is logged in')
-      }
+    computed: {
+      ...mapState('access', ['isLogged', 'isAdmin'])
     },
     methods: {
       onClick() {
         this.toggleNavbar = !this.toggleNavbar
       },
       logout(){
-        auth.signOut().then(() => {
-          confirm('Are you sure you want to logout?')
-          this.$router.push('/home')
-          this.isLogged = false
-        })
+        this.$store.dispatch('access/logout')
       },
     }
   }

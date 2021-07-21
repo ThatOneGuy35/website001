@@ -16,6 +16,7 @@ firebase.initializeApp(firebaseConfig)
 //utils
 const db = firebase.firestore()
 const auth = firebase.auth()
+const currentUser = auth.currentUser
 
 // db collection refferences
 const vehicles = db.collection('vehicles')
@@ -27,5 +28,6 @@ export {
     db,
     auth,
     vehicles,
-    users
+    users,
+    currentUser
 }
