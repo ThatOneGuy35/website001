@@ -54,10 +54,35 @@
   </div>
   <div class="price">
     <h2>Cost Breakdown</h2>
-    <v-row>
-          <v-col col="2" class="grey lighten-3">
-    </v-col>
-    </v-row>
+    <v-list class="grey lighten-3">
+      <v-list-item two-line>
+        <v-list-item-content>
+          <v-list-item-title>Tow Charge</v-list-item-title>
+          <v-list-item-subtitle>${{tC}}.00</v-list-item-subtitle>
+        </v-list-item-content>
+         <v-list-item-content>
+          <v-list-item-title>Fuel Surcharge</v-list-item-title>
+          <v-list-item-subtitle>$15.83</v-list-item-subtitle>
+        </v-list-item-content>
+         <v-list-item-content>
+          <v-list-item-title>Admin Fee</v-list-item-title>
+          <v-list-item-subtitle>$20.00</v-list-item-subtitle>
+        </v-list-item-content>
+         <v-list-item-content>
+          <v-list-item-title>Storage</v-list-item-title>
+          <v-list-item-subtitle>${{sC}}.00</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>Total</v-list-item-title>
+          <v-list-item-subtitle>${{totalC}}</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>Total w/o Admin and Fuel</v-list-item-title>
+          <v-list-item-subtitle>${{totalCWOE}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+    </v-list>
 
 
   </div>
@@ -84,14 +109,15 @@
 </template>
 
 <script>
+
 export default {
     name: 'ReleaseVehicle',
-    props: ['year','make','model','plate','state','vin','bio','color','type','datein','location','dateout', 'sDays'],
+    props: ['totalC','totalCWOE','sC','year','make','model','plate','state','vin','bio','color','type','datein','location','dateout', 'sDays', 'bC', 'tC'],
     data() {
       return {
         invoiceN: '1254',
       }
-    }
+    },
       
 }
 </script>

@@ -1,19 +1,20 @@
-import { vehicles } from "../../firebase";
+
 
 const state = {
-    vehicles: []
+    vehicle: []
 };
 
 const getters = {
-    allVehicles: state => state.vehicles
 };
 
 const actions = {
 };
-
-const mutations = {};
+//v-bind:to="{name: 'view-vehicle', params: {vehicle_id: vehicle.id}}
+const mutations = {
+};
 
 export default { 
+    namespaced: true,
     state,
     getters,
     actions,

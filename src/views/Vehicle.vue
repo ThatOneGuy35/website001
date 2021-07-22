@@ -1,6 +1,6 @@
 <template>
   <v-card>
-      <ReleaseVehicle v-show="showRel" :year="this.year" :make="this.make" :model="this.model" :plate="this.plate" :state="this.state" :vin="this.vin" :bio="this.bio" :color="this.color" :type="this.type" :datein="this.datein" :location="this.location" :dateout="this.dateout" :sDays="this.diffDays" />
+      <ReleaseVehicle v-show="showRel" :totalCWOE="this.totalWOE" :totalC="this.totalCharge" :sC="storageCharge" :year="this.year" :make="this.make" :model="this.model" :plate="this.plate" :state="this.state" :vin="this.vin" :bio="this.bio" :color="this.color" :type="this.type" :datein="this.datein" :location="this.location" :dateout="this.dateout" :sDays="this.diffDays" :tC="this.typeCharge" :bC="this.bioCharge" />
       <div v-show="this.showVeh">
             <v-list nav class="grey lighten-4">
             <v-list-item >
@@ -80,6 +80,11 @@ export default {
              showRel: false,
              showVeh: true,
              diffDays: null,
+             typeCharge: null,
+             bioCharge: null,
+             storageCharge: null,
+             totalCharge: null,
+             totalWOE: null,
         }
     },
     methods: {
@@ -90,8 +95,10 @@ export default {
                 this.key = 'No'
             } if(this.bio == 1) {
                 this.bio = 'Yes'
+                this.bioCharge = "$250.00"
             } else {
                 this.bio = 'No'
+                this.bioCharge = null
             } if(this.yard == 1) {
                 this.yard = 'Huntington'
             } else {
@@ -99,12 +106,16 @@ export default {
             } 
             if (this.type == 1) {
                 this.type = 'Wreck'
+                this.typeCharge = 340.00
             } else if(this.type == 2) {
                 this.type = 'Impound - LEO'
+                this.typeCharge = 100.00
             } else if(this.type == 3) {
                 this.type = 'Impound - PP'
+                this.typeCharge = 100.00
             } else if(this.type == 4) {
                 this.type = 'Other'
+                this.typeCharge = 100.00
             }
         },
         deleteVehicle() {
@@ -116,8 +127,11 @@ export default {
             var date1 = new Date(this.dateout);
             var date2 = new Date(this.datein);
             var diffTime = Math.abs(date2 - date1);
-            this.diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            console.log(this.diffDays + " days");
+            this.diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            this.storageCharge = Math.abs((this.diffDays + 1) * 25) 
+            this.totalCharge = Math.abs(this.storageCharge + this.typeCharge + 15.83 + 20.00)
+            console.log(this.totalCharge)
+            this.totalWOE = Math.abs(Number(this.storageCharge) + Number(this.typeCharge))
         },
     },
 
